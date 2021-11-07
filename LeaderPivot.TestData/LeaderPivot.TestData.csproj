@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -11,7 +11,7 @@
     <Description>Test data for use when debugging / developing LeaderPivot</Description>
     <Copyright>2021 Leader Analytics</Copyright>
     <PackageProjectUrl>https://github.com/leaderanalytics/LeaderPivot.TestData</PackageProjectUrl>
-    <PackageIcon>logo-xsmall.png</PackageIcon>
+    <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/leaderanalytics/LeaderPivot.TestData</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Leader Analytics LeaderAnalytics Pivot Table Pivot Grid Pivot Matrix</PackageTags>
@@ -19,7 +19,7 @@
     <Version>1.0.0</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <PackageId>LeaderAnalytics.LeaderPivot</PackageId>
+    <PackageId>LeaderAnalytics.LeaderPivot.TestData</PackageId>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
 
@@ -29,11 +29,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\logo-xsmall.png" Pack="true" PackagePath="\" />
+    <None Include="..\icon.png" Pack="true" PackagePath="\" />
     <None Include="..\LICENSE.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
-  <Target Name="CopyPackage" AfterTargets="Pack">
+  <ItemGroup>
+    <PackageReference Include="LeaderAnalytics.LeaderPivot" Version="1.0.9-beta.1" />
+  </ItemGroup>
+
+  <Target Name="CopyPackage" AfterTargets="Pack" Condition=" '$(Configuration)'=='Debug' ">
     <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="c:\NugetPackages\" />
+    <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).snupkg" DestinationFolder="c:\NugetPackages\" />
   </Target>
 </Project>
