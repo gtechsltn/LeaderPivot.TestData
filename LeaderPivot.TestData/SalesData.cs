@@ -31,18 +31,7 @@ namespace LeaderAnalytics.LeaderPivot.TestData
             List<Dimension<SalesData>> dimensions = new List<Dimension<SalesData>>
             {
                 // Rows
-                new Dimension<SalesData>
-                {
-                    DisplayValue = "Product Name",
-                    GroupValue = x => x.Product,
-                    HeaderValue = x => x.Product,
-                    IsRow = true,
-                    IsExpanded = true,
-                    Sequence = 3,
-                    IsAscending = true,
-                    IsEnabled = true
-                },
-
+                
                 new Dimension<SalesData>
                 {
                     DisplayValue = "Country",
@@ -54,7 +43,6 @@ namespace LeaderAnalytics.LeaderPivot.TestData
                     IsAscending = true,
                     IsEnabled = true
                 },
-
 
                 new Dimension<SalesData>
                 {
@@ -68,7 +56,6 @@ namespace LeaderAnalytics.LeaderPivot.TestData
                     IsEnabled = true
                 },
 
-
                 new Dimension<SalesData>
                 {
                     DisplayValue = "City",
@@ -77,6 +64,18 @@ namespace LeaderAnalytics.LeaderPivot.TestData
                     IsRow = true,
                     IsExpanded = true,
                     Sequence = 2,
+                    IsAscending = true,
+                    IsEnabled = true
+                },
+
+                new Dimension<SalesData>
+                {
+                    DisplayValue = "Product Name",
+                    GroupValue = x => x.Product,
+                    HeaderValue = x => x.Product,
+                    IsRow = true,
+                    IsExpanded = true,
+                    Sequence = 3,
                     IsAscending = true,
                     IsEnabled = true
                 },
