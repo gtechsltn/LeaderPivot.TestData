@@ -8,4 +8,4 @@ See the [`SalesData`](https://github.com/leaderanalytics/LeaderPivot.TestData/bl
 
 [Get LeaderPivot.Blazor](https://github.com/leaderanalytics/LeaderPivot.Blazor).
 
-[Get the LeaderPivot.Blazor Nuget package](https://www.nuget.org/packages/LeaderAnalytics.LeaderPivot.Blazor/).
+[Get the LeaderPivot.Blazor NuGet package](https://www.nuget.org/packages/LeaderAnalytics.LeaderPivot.Blazor/).
