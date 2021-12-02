@@ -1,34 +1,29 @@
-﻿using LeaderAnalytics.LeaderPivot;
-using System.Collections.Generic;
-using System.Linq;
+﻿namespace LeaderAnalytics.LeaderPivot.TestData;
 
-namespace LeaderAnalytics.LeaderPivot.TestData
+public class SalesData
 {
+    public string Product { get; set; }
+    public int Quantity { get; set; }
+    public decimal UnitPrice { get; set; }
 
-    public class SalesData
+    public string Country { get; set; }
+    public string State { get; set; }
+    public string City { get; set; }
+
+    public string Year { get; set; }
+    public string Quarter { get; set; }
+    public string Month { get; set; }
+}
+
+public class SalesDataService
+{
+    private string[] Months = new string[12] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec", };
+
+    public List<Dimension<SalesData>> LoadDimensions()
     {
-        public string Product { get; set; }
-        public int Quantity { get; set; }
-        public decimal UnitPrice { get; set; }
+        // Must have at least one row and at least one column dimension
 
-        public string Country { get; set; }
-        public string State { get; set; }
-        public string City { get; set; }
-
-        public string Year { get; set; }
-        public string Quarter { get; set; }
-        public string Month { get; set; }
-    }
-
-    public class SalesDataService
-    {
-        private string[] Months = new string[12] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec",};
-
-        public List<Dimension<SalesData>> LoadDimensions()
-        {
-            // Must have at least one row and at least one column dimension
-
-            List<Dimension<SalesData>> dimensions = new List<Dimension<SalesData>>
+        List<Dimension<SalesData>> dimensions = new List<Dimension<SalesData>>
             {
                 // Rows
                 
@@ -119,43 +114,43 @@ namespace LeaderAnalytics.LeaderPivot.TestData
                 }
             };
 
-            return dimensions;
-        }
+        return dimensions;
+    }
 
-        public List<Measure<SalesData>> LoadMeasures()
-        {
-            List<Measure<SalesData>> measures = new List<Measure<SalesData>>
+    public List<Measure<SalesData>> LoadMeasures()
+    {
+        List<Measure<SalesData>> measures = new List<Measure<SalesData>>
             {
                 new Measure<SalesData> { Aggragate = x => x.Measure.Sum(y => y.Quantity), DisplayValue = "Quantity", Format="{0:n0}", Sequence = 1, IsEnabled = true },
-                
-                new Measure<SalesData> { Aggragate = x => 
+
+                new Measure<SalesData> { Aggragate = x =>
                 {
                     return ((x.ColumnGroup?.Sum(y => y.Quantity) ?? 0) == 0) ? 1m :  x.Measure.Sum(y => y.Quantity) / (decimal)x.ColumnGroup.Sum(z => z.Quantity);
-                    
+
                 }, DisplayValue = "Quantity % of Column", Format="{0:P}", Sequence = 4, IsEnabled = true
-                
+
                 },
 
 
-                new Measure<SalesData> 
-                { 
-                    Aggragate = x => 
+                new Measure<SalesData>
+                {
+                    Aggragate = x =>
                     {
                         decimal result = (x.RowGroup?.Sum(y => y.Quantity * y.UnitPrice) ?? 0) == 0 ? 1m :  x.Measure.Sum(y => y.Quantity * y.UnitPrice) / ((decimal)x.RowGroup.Sum(y => y.Quantity * y.UnitPrice));
                         return result;
-                    
+
                     } , DisplayValue = "Revenue % of Row" , Format="{0:P}", Sequence = 5, IsEnabled = true
                 },
-               
+
                 new Measure<SalesData> { Aggragate = x => x.Measure.Sum(y => y.Quantity * y.UnitPrice), DisplayValue = "Revenue", Format="{0:C}", Sequence = 2, IsEnabled = true },
                 new Measure<SalesData> { Aggragate = x => x.Measure.Count(), DisplayValue = "Count", Format="{0:n0}", Sequence = 3, IsEnabled = true}
             };
-            return measures;
-        }
+        return measures;
+    }
 
-        public List<SalesData> GetSalesData()
-        {
-            return new List<SalesData>
+    public List<SalesData> GetSalesData()
+    {
+        return new List<SalesData>
             {
 
                 // US
@@ -400,9 +395,8 @@ namespace LeaderAnalytics.LeaderPivot.TestData
                 new SalesData {Product = "KVM Switch", Quantity = 92, UnitPrice = 15, Country = "Canada", State = "QU", City = "Ottawa", Year = "2020", Quarter = "4", Month = "Dec" }
 
             };
-        }
-
-
-        
     }
+
+
+
 }
