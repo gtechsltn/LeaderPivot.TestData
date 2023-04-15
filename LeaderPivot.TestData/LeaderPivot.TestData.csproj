@@ -17,9 +17,6 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>Leader Analytics LeaderAnalytics Pivot Table Pivot Grid Pivot Matrix</PackageTags>
     <PackageReleaseNotes>See Repository</PackageReleaseNotes>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
     <PackageId>LeaderAnalytics.LeaderPivot.TestData</PackageId>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
