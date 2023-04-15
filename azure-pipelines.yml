@@ -12,7 +12,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  project: '**/LeaderPivot.TestData.csproj'
+  project: 'LeaderPivot.TestData.csproj'
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
@@ -58,13 +58,11 @@ steps:
 
 
 - task: DotNetCoreCLI@2
-  displayName: "dotnet pack"
+  displayName: 'dotnet pack'
   inputs:
-    command: 'pack'
-    arguments: '--configuration $(buildConfiguration)'
-    packagesToPack: $(project)
-    versioningScheme: 'byEnvVar'
-    versionEnvVar: 'NugetVersion'
+    command: 'custom'
+    custom: 'pack'
+    arguments: '$(project) /p:PublicRelease=true --no-build --include-symbols --include-source -c=Release -o $(build.artifactstagingdirectory)'
 
   
 - task: NuGetCommand@2
