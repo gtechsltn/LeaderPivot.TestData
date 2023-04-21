@@ -78,7 +78,7 @@ steps:
     targetType: 'inline'
     script: 'nuget push $(Build.ArtifactStagingDirectory)\*.nupkg -ApiKey $(nuget-apikey) -Source https://api.nuget.org/v3/index.json'    
     
-    - task: NuGetCommand@2
+- task: NuGetCommand@2
   inputs:
     command: 'push'
     feedsToUse: 'select'
