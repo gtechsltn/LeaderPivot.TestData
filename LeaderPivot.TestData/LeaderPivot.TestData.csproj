@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="LeaderAnalytics.LeaderPivot" Version="1.2.0" />
+    <PackageReference Include="LeaderAnalytics.LeaderPivot" Version="1.2.5" />
   </ItemGroup>
 
   <Target Name="CopyPackage" AfterTargets="Pack" Condition=" '$(Configuration)'=='Debug' ">
